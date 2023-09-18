@@ -12,7 +12,7 @@ const inventorySchema = new mongoose.Schema({
         enum: ['o+', 'o-', 'AB+', 'AB-', 'A+', 'A-', 'B+', 'B-']
     },
     quantity: {
-        type: String,
+        type: Number,
         required: [true, 'blood quantity type require']
     },
     organisation: {
