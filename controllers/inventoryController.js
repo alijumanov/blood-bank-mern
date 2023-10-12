@@ -31,7 +31,7 @@ const createInventoryController = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        return res.status(500).send({
             success: false,
             message: 'Error in create inventory API',
             error
@@ -39,4 +39,22 @@ const createInventoryController = async (req, res) => {
     }
 };
 
-module.exports = { createInventoryController }
+const getInventoryController = async (req, res) => {
+    try {
+        const inventory = await inventoryModel.find({ organisation: req.body.userId }).populate('donar').populate('hospital').sort({ createdAt: -1 });
+        return res.status(200).send({
+            success: true,
+            message: 'GET all records successfully',
+            inventory
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+            success: false,
+            message: 'Error in GET all inventory',
+            error
+        })
+    }
+};
+
+module.exports = { createInventoryController, getInventoryController }
